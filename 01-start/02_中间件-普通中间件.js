@@ -5,15 +5,19 @@ const express = require('express');
 const app = express();
 
 // 3. 中间的各种逻辑处理
-// 监听默认路径
-app.get('/', (req, res, next) => {
-    // res.send('hello express'); 虽然也能显示内容，但是有区别
-    res.end('hello express')
+// 注册一个中间件（回调函数），即任何请求都会被接受处理，类似于拦截器
+app.use((req, res, next) => {
+    console.log('第一个中间件'); // 会在服务器内打印
+    next();
 })
-app.get('/login', (req, res, next) => {
-    res.send('hello login')
+app.use((req, res, next) => {
+    console.log('第2个中间件');
+    next();
 })
-
+app.use((req, res, next) => {
+    console.log('第3个中间件');
+   res.end('结束响应')
+})
 
 // 4. 开启监听
 // app 虽然是函数，但在js中也是对象，故可以调用函数
