@@ -1,1 +1,3 @@
-**/node_modules
+# 两个杠表示所有文件夹，包括子文件夹的也可以忽略
+**/node_modules 
+/build
